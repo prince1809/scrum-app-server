@@ -1,9 +1,9 @@
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
-//var privateKey = fs.readFileSync(__dirname + '/cert/privateKey.pem').toString();
-//var certificate = fs.readFileSync(__dirname + '/cert/certificate.pem').toString();
-//var credentials = {key: privateKey, cert: certificate};
+var privateKey = fs.readFileSync(__dirname + '/cert/key.pem').toString();
+var certificate = fs.readFileSync(__dirname + '/cert/cert.pem').toString();
+var credentials = {key: privateKey, cert: certificate};
 
 var express = require('express');
 var mongoProxy = require('./lib/mongo-proxy');
@@ -15,3 +15,7 @@ var protectJSON = require('./lib/protectJSON');
 require('express-namespace');
 
 var app = express();
+secureServer = https.createServer(credentials,app);
+var server = http.createServer(app);
+
+require('./lib/routes/static').addRoutes(app,config);

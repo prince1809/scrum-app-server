@@ -8,5 +8,12 @@ module.exports = {
   security: {
     dbName: 'ascrum',
     usersCollection: 'users'
+  },
+  server: {
+    listenPort: 3000,
+    securePort: 8433,
+    distFolder: path.resolve(__dirname, '../client/dist'),
+    staticUrl: '/static',
+    cookieSecret: 'angular-app'
   }
-}
+};
